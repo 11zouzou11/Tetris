@@ -115,7 +115,7 @@ function playerDrop() {
     if (collision(arena, player)) {
         player.position.y--;
         merge(arena, player);
-        player.position.y = 0;
+        playerReset();
     }
     dropCounter = 0;
 }
@@ -124,6 +124,19 @@ function playerMove(dir){
     player.position.x += dir;
     if (collision(arena, player)) {
         player.position.x -= dir;
+    }
+}
+
+function playerReset() {
+    const pieces = 'TJLOSZI';
+    player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
+    player.pos.y = 0;
+    player.pos.x = (arena[0].length / 2 | 0) -
+                   (player.matrix[0].length / 2 | 0);
+    if (collide(arena, player)) {
+        arena.forEach(row => row.fill(0));
+        player.score = 0;
+        updateScore();
     }
 }
 
