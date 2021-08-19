@@ -84,7 +84,18 @@ function playerMove(dir){
 }
 
 function playerRotate(dir) {
+    const position = player.position.x
+    let offset = 1;
     rotate(player.matrix, dir);
+    while(collision(arena, player)) {
+        player.position.x += offset;
+        offset = -(offset +  (offset > 0 ? 1 : -1));
+        if (offset > player.matrix[0].length){
+            rotate(player.matrix, -dir);
+            player.position.x = position;
+            return;
+        }
+    }
 }
 
 function rotate(matrix, dir) {
