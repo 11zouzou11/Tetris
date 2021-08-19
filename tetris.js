@@ -33,24 +33,29 @@ let dropCounter=0;
 let dropInterval = 1000; // ms that means 1 sec 
 let lastTime = 0;
 
-function update(time = 0) {
+function update(time = 0)
     const deltaTime = time - lastTime;
     lastTime = time;
-    console.log(deltaTime);
+
     dropCounter += deltaTime;
     if (dropCounter > dropInterval) {
         player.position.y++;
         dropCounter = 0 ;
     }
-
     draw();
     requestAnimationFrame(update);
-}
+
 
 const player = {
     position:{x:5, y:5},
     matrix: matrix,
 }
+
+document.addEventListener("keydown", event => {
+    if (event.keycode === 37) {
+        player.position.x--;
+    }
+})
 
 update();
 
