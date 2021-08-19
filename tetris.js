@@ -3,15 +3,13 @@ const context = canvas.getContext("2d");
 
 context.scale(20,20);
 
-
-
 const matrix = [
     [0,0,0],
     [1,1,1],
     [0,1,0],
 ]
 
-
+// collision function between the player and the walls 
 function collision(arena, player) {
     const m = player.matrix;
     const o = player.position;
@@ -66,6 +64,8 @@ function merge(arena, player) {
         });
     });
 }
+
+// the player piece droping down, and collision to start a new piece at the top
 function playerDrop() {
     player.position.y++;
     if (collision(arena, player)) {
@@ -76,6 +76,12 @@ function playerDrop() {
     dropCounter = 0;
 }
 
+function playerMove(dir){
+    player.position.x += dir;
+    if (collision(arena, player)) {
+        player.position.x -= dir;
+    }
+}
 
 let dropCounter = 0;
 let dropInterval = 1000; // ms is 1 sec 
@@ -107,9 +113,10 @@ const player = {
 // when a player presses a key to move the piece left, right, and down 
 document.addEventListener('keydown', event => {
     if (event.keyCode === 37) {
+        playerMove(-1);
         player.position.x--;
     } else if (event.keyCode === 39) {
-        player.position.x++;
+        playerMove(-1);
     } else if (event.keyCode === 40) {
         playerDrop();
     }
