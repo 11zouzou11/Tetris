@@ -1,7 +1,7 @@
-const canvas = document.getElementById("tetris");
-const context = canvas.getContext("2d");
+const canvas = document.getElementById('tetris');
+const context = canvas.getContext('2d');
 
-context.scale(20,20);
+context.scale(20, 20);
 
 function arenaSweep() {
     let rowCount = 1;
@@ -21,11 +21,9 @@ function arenaSweep() {
     }
 }
 
-
-// collision function between the player and the walls 
-function collision(arena, player) {
+function collide(arena, player) {
     const m = player.matrix;
-    const o = player.position;
+    const o = player.pos;
     for (let y = 0; y < m.length; ++y) {
         for (let x = 0; x < m[y].length; ++x) {
             if (m[y][x] !== 0 &&
@@ -37,7 +35,6 @@ function collision(arena, player) {
     }
     return false;
 }
-
 
 function createMatrix(w, h) {
     const matrix = [];
@@ -94,56 +91,73 @@ function createPiece(type)
     }
 }
 
-
-// the draw fucntion 
-function draw() {
-    context.fillStyle = '#000';
-    context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    drawMatrix(arena, {x:0, y:0});
-    drawMatrix(player.matrix, player.position);
-}
-
-
 function drawMatrix(matrix, offset) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
-            if (value !==0) {
-                context.fillStyle = 'colors';
+            if (value !== 0) {
+                context.fillStyle = colors[value];
                 context.fillRect(x + offset.x,
                                  y + offset.y,
-                                  1, 1,);
-            }
-        })
-    });
-} 
-
-function merge(arena, player) {
-    player.matrix.forEach((row, y) => {
-        row.forEach((value, x) => {
-            if (value !== 0) {
-                arena[y + player.positon.y][x + player.position.x] = value;
+                                 1, 1);
             }
         });
     });
 }
 
-// the player piece droping down, and collision to start a new piece at the top
+function draw() {
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    drawMatrix(arena, {x: 0, y: 0});
+    drawMatrix(player.matrix, player.pos);
+}
+
+function merge(arena, player) {
+    player.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value !== 0) {
+                arena[y + player.pos.y][x + player.pos.x] = value;
+            }
+        });
+    });
+}
+
+function rotate(matrix, dir) {
+    for (let y = 0; y < matrix.length; ++y) {
+        for (let x = 0; x < y; ++x) {
+            [
+                matrix[x][y],
+                matrix[y][x],
+            ] = [
+                matrix[y][x],
+                matrix[x][y],
+            ];
+        }
+    }
+
+    if (dir > 0) {
+        matrix.forEach(row => row.reverse());
+    } else {
+        matrix.reverse();
+    }
+}
+
 function playerDrop() {
-    player.position.y++;
-    if (collision(arena, player)) {
-        player.position.y--;
+    player.pos.y++;
+    if (collide(arena, player)) {
+        player.pos.y--;
         merge(arena, player);
         playerReset();
-        arenaSweep;
+        arenaSweep();
         updateScore();
     }
     dropCounter = 0;
 }
 
-function playerMove(dir){
-    player.position.x += dir;
-    if (collision(arena, player)) {
-        player.position.x -= dir;
+function playerMove(offset) {
+    player.pos.x += offset;
+    if (collide(arena, player)) {
+        player.pos.x -= offset;
     }
 }
 
@@ -161,51 +175,34 @@ function playerReset() {
 }
 
 function playerRotate(dir) {
-    const position = player.position.x
+    const pos = player.pos.x;
     let offset = 1;
     rotate(player.matrix, dir);
-    while(collision(arena, player)) {
-        player.position.x += offset;
-        offset = -(offset +  (offset > 0 ? 1 : -1));
-        if (offset > player.matrix[0].length){
+    while (collide(arena, player)) {
+        player.pos.x += offset;
+        offset = -(offset + (offset > 0 ? 1 : -1));
+        if (offset > player.matrix[0].length) {
             rotate(player.matrix, -dir);
-            player.position.x = position;
+            player.pos.x = pos;
             return;
         }
     }
 }
 
-function rotate(matrix, dir) {
-    for (let y = 0 ; y < matrix.length; ++y) {
-        for (let x = 0; x < y ; ++x) {
-            [matrix[x][y],
-             matrix[y][x],    
-            ]=[
-             matrix[y][x],
-             matrix[x][y],
-            ];
-        }
-    }
-    if (dir > 0) {
-        matrix.forEach(row => row.reverse());
-    }else matrix.reverse;
-}
-
 let dropCounter = 0;
-let dropInterval = 1000; // ms is 1 sec 
+let dropInterval = 1000;
+
 let lastTime = 0;
-
-
- // the updating time function that makes the piece drops every 1s 
-
-function update(time = 0){
+function update(time = 0) {
     const deltaTime = time - lastTime;
-    lastTime = time;
 
     dropCounter += deltaTime;
     if (dropCounter > dropInterval) {
         playerDrop();
     }
+
+    lastTime = time;
+
     draw();
     requestAnimationFrame(update);
 }
@@ -214,7 +211,19 @@ function updateScore() {
     document.getElementById('score').innerText = player.score;
 }
 
-const arena = createMatrix(12, 20);
+document.addEventListener('keydown', event => {
+    if (event.keyCode === 37) {
+        playerMove(-1);
+    } else if (event.keyCode === 39) {
+        playerMove(1);
+    } else if (event.keyCode === 40) {
+        playerDrop();
+    } else if (event.keyCode === 81) {
+        playerRotate(-1);
+    } else if (event.keyCode === 87) {
+        playerRotate(1);
+    }
+});
 
 const colors = [
     null,
@@ -227,27 +236,14 @@ const colors = [
     '#3877FF',
 ];
 
+const arena = createMatrix(12, 20);
+
 const player = {
-    position: {x:0, y:0},
-    matrix: nukk,
-    scrore: 0,
+    pos: {x: 0, y: 0},
+    matrix: null,
+    score: 0,
 };
-// when a player presses a key to move the piece left, right, and down 
-document.addEventListener('keydown', event => {
-    if (event.keyCode === 37) {
-        playerMove(-1);
-        player.position.x--;
-    } else if (event.keyCode === 39) {
-        playerMove(-1);
-    } else if (event.keyCode === 40) {
-        playerDrop();
-    }else if (event.keyCode === 87) {
-        playerRotate(1);
-    }
-});
 
 playerReset();
 updateScore();
 update();
-
-
