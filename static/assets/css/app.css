@@ -65,3 +65,22 @@ button {
     flex-direction: column;
     justify-content: space-between;
 }
+
+
+.info-section {
+    position: relative;
+    text-align: center;
+    font-weight: 600;
+    padding: 20px;
+    font-size: 25px;
+    color: var(--color);
+}   
+
+.info-section #level {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 30px;
+    font-size: 18px;
+    
+}
