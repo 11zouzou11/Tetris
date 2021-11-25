@@ -84,3 +84,20 @@ button {
     font-size: 18px;
     
 }
+
+.board-section {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    margin: auto;
+    padding: 10px;
+    box-shadow: var(--board-shadow-inset);
+    border-radius: 10px;
+
+}
+
+
+.block {
+    width: var(--block-size);
+    height: var(--block-size);
+    border: 0.1px solid var(--bg-color);
+}
