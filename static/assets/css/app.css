@@ -99,5 +99,27 @@ button {
 .block {
     width: var(--block-size);
     height: var(--block-size);
+ 
     border: 0.1px solid var(--bg-color);
+}
+
+.setting-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+}
+
+.setting-section button {
+    margin: 0 10px;
+    color: var(--setting-btn-color);
+}
+
+i.bxs-moon {
+    display: block;
+
+}
+
+i.bxs-sun {
+    display: none;
 }
