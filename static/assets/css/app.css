@@ -85,7 +85,7 @@ button {
     
 }
 
-.board-section {
+.grid-section {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     margin: auto;
@@ -141,3 +141,57 @@ i.bxs-sun {
     justify-content: center;
     
 }
+
+.btn:active {
+    box-shadow: var(--btn-shadow-inset);
+}
+
+@media only screen and (max-width: 425px) {
+    :root {
+        --block-size: 18px    
+    }
+
+    .game-wrapper {
+        box-shadow: unset;
+        border-radius: unset;
+    }
+    
+    .setting-section {
+        position: absolute;
+        flex-direction: column;
+        bottom: unset;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 2px;
+        padding: unset;
+    }
+
+    .setting-section button {
+        margin-bottom: 15px;
+    }
+}
+
+.control-section {
+    display: flex;
+
+}
+
+.col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.col:nth-child(1) {
+    width: 60%;
+}
+.col:nth-child(2) {
+    width: 40%;
+}
+
+.arrow-control {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+

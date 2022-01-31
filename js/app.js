@@ -1,4 +1,4 @@
-let board = document.querySelector('.board-section')
+let board = document.querySelector('.grid-section')
 
 for (let i= 0; i < 200; i++) {
     let block = '<div class="block"></div>'
