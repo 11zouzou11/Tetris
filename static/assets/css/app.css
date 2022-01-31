@@ -123,3 +123,10 @@ i.bxs-moon {
 i.bxs-sun {
     display: none;
 }
+
+.btn {
+    width: var(--button-size);
+    height: var(--button-size);
+    box-shadow: var(--btn-shadow);
+    border-radius: 25px;
+}
