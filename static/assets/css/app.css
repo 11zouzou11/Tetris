@@ -169,6 +169,11 @@ i.bxs-sun {
     .setting-section button {
         margin-bottom: 15px;
     }
+
+    .control-section {
+        display: flex;
+
+    }
 }
 
 .control-section {
@@ -195,3 +200,8 @@ i.bxs-sun {
     grid-template-columns: repeat(3, 1fr);
 }
 
+.btn-large {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 30px;
+}
