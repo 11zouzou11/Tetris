@@ -129,4 +129,15 @@ i.bxs-sun {
     height: var(--button-size);
     box-shadow: var(--btn-shadow);
     border-radius: 25px;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--color);
+    border: none;
+    outline: none;
+    background-color: var(--bg-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
