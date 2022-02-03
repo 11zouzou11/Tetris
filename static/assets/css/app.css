@@ -323,3 +323,134 @@ i.bxs-sun {
     width: calc(var(--button-size) * 2);
     font-size: 20px;
 }
+/* images fall effect */
+.container img.fall {
+    position: absolute;
+    animation: fall linear infinite;
+}
+/* end images fall effect */
+
+/* loading */
+.loading {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    z-index: 100;
+    animation: hide 1s linear forwards;
+    animation-delay: 2.7s;
+}
+
+.loading .square {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: calc(var(--block-size) * 4);
+    height: calc(var(--block-size) * 4);
+    overflow: hidden;
+    animation: rotate 0.5s linear forwards;
+    animation-delay: 2.2s;
+}
+
+.loading .square div {
+    width: var(--block-size);
+    height: var(--block-size);
+    border: 1px solid var(--bg-color);
+    background-color: var(--color);
+    animation: down 0.5s linear forwards;
+    transform: translateY(-500%);
+}
+
+/* L block */
+.loading .square div:nth-child(5),
+.loading .square div:nth-child(9),
+.loading .square div:nth-child(13),
+.loading .square div:nth-child(14) {
+    background-color: #e84393;
+}
+/* end L block */
+
+/* S block */
+.loading .square div:nth-child(6),
+.loading .square div:nth-child(10),
+.loading .square div:nth-child(11),
+.loading .square div:nth-child(15) {
+    background-color: #e1b12c;
+    animation-delay: 0.5s;
+}
+/* end S block */
+
+/* J block */
+.loading .square div:nth-child(1),
+.loading .square div:nth-child(2),
+.loading .square div:nth-child(3),
+.loading .square div:nth-child(7) {
+    background-color: #00cec9;
+    animation-delay: 1.5s;
+}
+/* end J block */
+
+/* I block */
+.loading .square div:nth-child(4),
+.loading .square div:nth-child(8),
+.loading .square div:nth-child(12),
+.loading .square div:nth-child(16) {
+    background-color: #c23616;
+    animation-delay: 1s;
+}
+/* end I block */
+
+/* end loading */
+
+/* animation */
+@keyframes down {
+    0% {
+        transform: translateY(-300%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(2000%) rotate(90deg);
+        opacity: 1;
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

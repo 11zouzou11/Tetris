@@ -25,6 +25,10 @@ btns.forEach(e => {
                 body.classList.add('play')
                 body.classList.remove('pause')
                 break
+            case 'btn-help':
+                let how_to = document.querySelector('.how-to')
+                body.classList.toggle('active')
+                break
         }
     })
 })
