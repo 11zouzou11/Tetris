@@ -228,3 +228,44 @@ i.bxs-sun {
 .btn-width {
     width: 200px;
 }
+
+.brand {
+    padding: 40px 0;
+    font-size: 25px;
+    color: var(--color);
+    text-align: center;
+}
+
+#btn-new-game,
+#btn-pause {
+    display: none;
+}
+
+
+.result {
+    text-align: center;
+    margin-bottom: 90px;
+    display: none;
+}
+
+.result p {
+    color: var(--setting-btn-color);
+}
+
+.result h1 {
+    color: var(--color);
+    margin-bottom: 30px;
+}
+
+.how-to {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    box-shadow: var(--wrapper-shadow);
+    padding: 30px;
+    border-radius: 20px;
+    background-color: var(--bg-color);
+    color: var(--color);
+    transition: transform .5s ease-in-out;
+}
