@@ -175,6 +175,11 @@ i.bxs-sun {
         display: flex;
 
     }
+
+    .how-to,
+    #btn-help {
+        display: none;
+    }
 }
 
 .control-section {
@@ -211,6 +216,18 @@ i.bxs-sun {
 .info-section,
 .control-section {
     transform: scale(0);
+}
+
+.play .board-section,
+.play .info-section,
+.play .control-section {
+    transform: scale(1);
+}
+.play .menu-section {
+    transform: scale(0);
+}
+.play #btn-pause {
+    display: flex;
 }
 
 .menu-section {
@@ -261,11 +278,27 @@ i.bxs-sun {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translate(0, -50%);
+    transform: translate(100%, -50%);
     box-shadow: var(--wrapper-shadow);
     padding: 30px;
     border-radius: 20px;
     background-color: var(--bg-color);
     color: var(--color);
     transition: transform .5s ease-in-out;
+}
+.how-to:active {
+    transform: translate(0, -50%);
+
+}
+.how-to h3 {
+    margin-bottom: 40px;
+}
+
+.how-to td {
+    padding: 20px;
+}
+
+.keycap {
+    width: calc(var(--button-size) * 2);
+    font-size: 20px;
 }
