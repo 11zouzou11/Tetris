@@ -85,7 +85,7 @@ button {
     
 }
 
-.grid-section {
+.board-section {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     margin: auto;
@@ -154,6 +154,7 @@ i.bxs-sun {
     .game-wrapper {
         box-shadow: unset;
         border-radius: unset;
+        padding-bottom: 10px;
     }
     
     .setting-section {
@@ -204,4 +205,26 @@ i.bxs-sun {
     width: 80px !important;
     height: 80px !important;
     font-size: 30px;
+}
+
+.board-section, 
+.info-section,
+.control-section {
+    transform: scale(0);
+}
+
+.menu-section {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.menu-section button {
+    margin-bottom: 30px;
+
+}
+
+.btn-width {
+    width: 200px;
 }
