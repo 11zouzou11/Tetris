@@ -148,7 +148,7 @@ i.bxs-sun {
 
 @media only screen and (max-width: 425px) {
     :root {
-        --block-size: 18px    
+        --block-size: 18px;
     }
 
     .game-wrapper {
@@ -156,8 +156,17 @@ i.bxs-sun {
         border-radius: unset;
         padding-bottom: 10px;
     }
-    
+
+    .control-section {
+        display: flex;
+    }
+
     .setting-section {
+        padding: unset;
+        margin-top: -40px;
+    }
+
+    .play .setting-section {
         position: absolute;
         flex-direction: column;
         bottom: unset;
@@ -171,13 +180,12 @@ i.bxs-sun {
         margin-bottom: 15px;
     }
 
-    .control-section {
-        display: flex;
-
-    }
-
     .how-to,
     #btn-help {
+        display: none;
+    }
+
+    .container img.fall {
         display: none;
     }
 }
@@ -228,6 +236,19 @@ i.bxs-sun {
 }
 .play #btn-pause {
     display: flex;
+}
+
+.pause #btn-new-game,
+.end #btn-new-game {
+    display: block;
+}
+
+.end .result {
+    display: block;
+}
+
+.end #btn-play {
+    display: none;
 }
 
 .menu-section {
