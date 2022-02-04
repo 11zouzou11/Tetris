@@ -1,5 +1,48 @@
 let btns = document.querySelectorAll('[id*="btn-"]')
 
+const iBlock = [
+    [0, 1, 0, 0],
+    [0, 1, 0, 0],
+    [0, 1, 0, 0],
+    [0, 1, 0, 0],
+];
+
+const oBlock = [
+    [2,2],
+    [2,2]
+]
+
+const tBlock = [
+    [0,3,0],
+    [3,3,0],
+    [0,3,0]
+]
+
+const sBlock = [
+    [4,0,0],
+    [4,4,0],
+    [0,4,0]
+]
+
+const zBlock = [
+    [0,5,0],
+    [5,5,0],
+    [5,0,0]
+]
+
+const lBlock = [
+    [6,6,0],
+    [0,6,0],
+    [0,6,0]
+]
+
+const jBlock = [
+    [7,7,0],
+    [7,0,0],
+    [7,0,0]
+]
+
+const BLOCKS = [iBlock, oBlock, tBlock, sBlock, zBlock, lBlock, jBlock]
 
 btns.forEach(e => {
     let btn_id = e.getAttribute('id')
