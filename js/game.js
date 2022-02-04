@@ -325,6 +325,61 @@ let level_span = document.querySelector('#level')
 
 score_span.innerHTML = game.score
 
+// game loop
+gameLoop = () => {
+    if (game.state === GAME_STATE.PLAY) {
+        if (movable(tetromino, grid, DIRECTION.DOWN)) {
+            moveDown(tetromino, grid)
+        } else {
+            updateGrid(tetromino, grid)
+            checkGrid(grid)
+            tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
+
+            // check grid is full -> game end
+            if (movable(tetromino, grid, DIRECTION.DOWN)) {
+                drawTetromino(tetromino, grid)
+            } else {
+                // game end
+                game.state = GAME_STATE.END
+                let body = document.querySelector('body')
+                body.classList.add('end')
+                body.classList.remove('play')
+
+                let rs_level = document.querySelector('#result-level')
+                let rs_score = document.querySelector('#result-score')
+
+                rs_level.innerHTML = game.level
+                rs_score.innerHTML = game.score
+            }
+            
+        }
+    }
+}
+
+// game start
+gameStart = () => {
+    game.state = GAME_STATE.PLAY
+    level_span.innerHTML = 'lv. 1'
+    score_span.innerHTML = '0'
+    tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
+    drawTetromino(tetromino, grid)
+    // interval
+    game.interval = setInterval(gameLoop, game.speed);
+}
+
+gamePause = () => {
+    game.state = GAME_STATE.PAUSE
+}
+
+gameResume = () => {
+    game.state = GAME_STATE.PLAY
+}
+
+
+
+
+
+
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
 
 
