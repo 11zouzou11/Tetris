@@ -275,7 +275,24 @@ updateGrid = (tetromino, grid) => {
         })
     })
 }
+// check full row
+checkFilledRow = (row) => {
+    return row.every(v => {
+        return v.value !== 0
+    })
+}
 
+// delete filled row
+deleteRow = (row_index, grid) => {
+    for (let row = row_index; row > 0; row--) {
+        for (let col = 0; col < 10; col++) {
+            grid.board[row][col].value = grid.board[row - 1][col].value
+            let value = grid.board[row][col].value
+            // update field
+            field[grid.board[row][col].index].style.background = value === 0 ? TRANSPARENT : COLORS[value - 1]
+        }
+    }
+}
 
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
 
