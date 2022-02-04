@@ -44,6 +44,10 @@ const jBlock = [
 
 const BLOCKS = [iBlock, oBlock, tBlock, sBlock, zBlock, lBlock, jBlock]
 
+// board size
+const GRID_HEIGHT = 20
+const GRID_WIDTH = 10
+
 btns.forEach(e => {
     let btn_id = e.getAttribute('id')
     let body = document.querySelector('body')

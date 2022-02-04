@@ -1,3 +1,35 @@
+let field = document.getElementsByClassName('block')
+
+// initializing new grid
+newGrid = (width, height) => {
+    let grid = new Array(height)
+    for (let i = 0; i < height; i++) {
+        grid[i] = new Array(width)
+    }
+
+    let index = 0
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+            grid[i][j] = {
+                index: index++,
+                value: 0
+            }
+        }
+    }
+
+    return {
+        board: grid,
+        width: width,
+        height: height
+    }
+}
+
+
+let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
+
+
+
+
 let board = document.querySelector('.board-section')
 
 for (let i = 0; i < 200; i++) {
