@@ -25,8 +25,19 @@ newGrid = (width, height) => {
 }
 
 
-let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
+// reset the grid
 
+resetGrid = (grid) => {
+    for (let i = 0; i < grid.height; i++) {
+        for (let j = 0; j < grid.width; j++) {
+            grid.board[i][j].value = 0
+        }
+    }
+
+    Array.form(field).forEach(e => {
+        e.style.background = TRANSPARENT
+    });
+}
 
 
 
