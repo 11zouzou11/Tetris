@@ -48,6 +48,18 @@ const BLOCKS = [iBlock, oBlock, tBlock, sBlock, zBlock, lBlock, jBlock]
 const GRID_HEIGHT = 20
 const GRID_WIDTH = 10
 
+
+//  keycode
+
+const KEY = {
+    UP: 38,
+    DOWN: 40,
+    LEFT: 37,
+    RIGHT: 39,
+    SPACE: 32,
+    P: 80
+}
+
 btns.forEach(e => {
     let btn_id = e.getAttribute('id')
     let body = document.querySelector('body')
