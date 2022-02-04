@@ -375,10 +375,52 @@ gameResume = () => {
     game.state = GAME_STATE.PLAY
 }
 
+gameReset = () => {
+    clearInterval(game.interval)
+    resetGrid(grid)
+    game.score = START_SCORE
+    game.speed = START_SPEED
+    game.state = GAME_STATE.END
+    game.level = 1
+    game.interval = null
+    tetromino = null
+}
 
-
-
-
+// add keyboard event
+document.addEventListener('keydown', e => {
+    let body = document.querySelector('body')
+    e.preventDefault()
+    let key = e.which
+    switch(key) {
+        case KEY.DOWN:
+            moveDown(tetromino, grid)
+            break
+        case KEY.LEFT:
+            moveLeft(tetromino, grid)
+            break
+        case KEY.RIGHT:
+            moveRight(tetromino, grid)
+            break
+        case KEY.UP:
+            rotate(tetromino, grid)
+            break
+        case KEY.SPACE:
+            hardDrop(tetromino, grid)
+            break
+        case KEY.P:
+            let btn_play = document.querySelector('#btn-play')
+            if (game.state !== GAME_STATE.PAUSE) {
+                gamePause()
+                body.classList.add('pause')
+                body.classList.remove('play')
+                btn_play.innerHTML = 'resume'
+            } else {
+                body.classList.remove('pause')
+                body.classList.add('play')
+                gameResume()
+            }
+    }
+})
 
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
 
