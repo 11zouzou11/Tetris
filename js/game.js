@@ -156,6 +156,46 @@ clearTetromino = (tetromino, grid) => {
         })
     })
 }
+// check point is in grid
+isInGrid = (x, y, grid) => {
+    return x < grid.height && x >=0 && y >= 0 && y < grid.width
+}
+
+// check point is filled or blank
+isFilled = (x, y, grid) => {
+    if (!isInGrid(x, y, grid)) {
+        return false
+    } else {
+        return grid.board[x][y].value !== 0
+    }
+}
+
+// check tetromino is movable
+movable = (tetromino, grid, direction) => {
+    let newX = tetromino.x
+    let newY = tetromino.y
+
+    switch(direction) {
+        case DIRECTION.DOWN:
+            newX = tetromino.x + 1
+            break
+        case DIRECTION.LEFT:
+            newY = tetromino.y - 1
+            break
+        case DIRECTION.RIGHT:
+            newY = tetromino.y + 1
+            break
+    }
+
+    return tetromino.block.every((row, i) => {
+        return row.every((value, j) => {
+            let x = newX + i
+            let y = newY + j
+            return value === 0 || (isInGrid(x, y, grid) && !isFilled(x, y, grid))
+        })
+    })
+}
+
 // move tetromino down
 moveDown = (tetromino, grid) => {
     if (!movable(tetromino, grid, DIRECTION.DOWN)) return
@@ -164,6 +204,21 @@ moveDown = (tetromino, grid) => {
     drawTetromino(tetromino, grid)
 }
 
+// move tetromino left
+moveLeft = (tetromino, grid) => {
+    if (!movable(tetromino, grid, DIRECTION.LEFT)) return
+    clearTetromino(tetromino, grid)
+    tetromino.y--
+    drawTetromino(tetromino, grid)
+}
+
+// move tetromino right
+moveRight = (tetromino, grid) => {
+    if (!movable(tetromino, grid, DIRECTION.RIGHT)) return
+    clearTetromino(tetromino, grid)
+    tetromino.y++
+    drawTetromino(tetromino, grid)
+}
 
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
 
