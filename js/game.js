@@ -219,6 +219,51 @@ moveRight = (tetromino, grid) => {
     tetromino.y++
     drawTetromino(tetromino, grid)
 }
+// check rotatable
+rotatable = (tetromino, grid) => {
+    // clone block
+    let cloneBlock = JSON.parse(JSON.stringify(tetromino.block))
+    
+    // rotate clone block
+    for (let y = 0; y < cloneBlock.length; y++) {
+        for (let x = 0; x < y; ++x) {
+            [cloneBlock[x][y], cloneBlock[y][x]] = [cloneBlock[y][x], cloneBlock[x][y]]
+        }
+    }
+    cloneBlock.forEach(row => row.reverse())
+
+    // check rotated block is visible
+    return cloneBlock.every((row, i) => {
+        return row.every((value, j) => {
+            let x = tetromino.x + i
+            let y = tetromino.y + j
+            return value === 0 || (isInGrid(x, y, grid) && !isFilled(x, y, grid))
+        })
+    })
+}
+
+// rotate tetromino
+rotate = (tetromino, grid) => {
+    if (!rotatable(tetromino, grid)) return
+    clearTetromino(tetromino, grid)
+    for (let y = 0; y < tetromino.block.length; y++) {
+        for (let x = 0; x < y; ++x) {
+            [tetromino.block[x][y], tetromino.block[y][x]] = [tetromino.block[y][x], tetromino.block[x][y]]
+        }
+    }
+    tetromino.block.forEach(row => row.reverse())
+    drawTetromino(tetromino, grid)
+}
+
+// hard drop tetromino
+hardDrop = (tetromino, grid) => {
+    clearTetromino(tetromino, grid)
+    while (movable(tetromino, grid, DIRECTION.DOWN)) {
+        tetromino.x++
+    }
+    drawTetromino(tetromino, grid)
+}
+
 
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
 
