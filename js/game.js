@@ -294,6 +294,37 @@ deleteRow = (row_index, grid) => {
     }
 }
 
+// check grid for delete row
+checkGrid = (grid) => {
+    let row_count = 0
+    grid.board.forEach((row, i) => {
+        if (checkFilledRow(row)) {
+            deleteRow(i, grid)
+            row_count++
+        }
+    })
+    if (row_count > 0) updateGame(row_count)
+}
+
+// game objects
+
+let game = {
+    score: START_SCORE,
+    speed: START_SPEED,
+    level: 1,
+    state: GAME_STATE.END,
+    interval: null
+}
+
+let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
+
+let tetromino = null
+
+let score_span = document.querySelector('#score')
+let level_span = document.querySelector('#level')
+
+score_span.innerHTML = game.score
+
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
 
 
