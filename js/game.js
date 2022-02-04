@@ -60,6 +60,25 @@ const KEY = {
     P: 80
 }
 
+// start position of block
+const START_X = 0
+const START_Y = 4
+
+
+// start speed and score
+const START_SCORE = 0
+const START_SPEED = 1000
+
+const MAIN_SCORE = 100
+const BONUS_SCORE = 30
+
+// game state
+const GAME_STATE = {
+    PLAY: 'PLAY',
+    PAUSE: 'PAUSE',
+    END: 'END',
+}
+
 btns.forEach(e => {
     let btn_id = e.getAttribute('id')
     let body = document.querySelector('body')
