@@ -1,5 +1,3 @@
-let btns = document.querySelectorAll('[id*="btn-"]')
-
 const iBlock = [
     [0, 1, 0, 0],
     [0, 1, 0, 0],
@@ -78,6 +76,97 @@ const GAME_STATE = {
     PAUSE: 'PAUSE',
     END: 'END',
 }
+
+
+
+let field = document.getElementsByClassName('block')
+
+// initial new game grid
+newGrid = (width, height) => {
+    let grid = new Array(height)
+    for (let i = 0; i < height; i++) {
+        grid[i] = new Array(width)
+    }
+
+    let index = 0
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+            grid[i][j] = {
+                index: index++,
+                value: 0
+            }
+        }
+    }
+
+    return {
+        board: grid,
+        width: width,
+        height: height
+    }
+}
+
+// reset grid and field color
+resetGrid = (grid) => {
+    for (let i = 0; i < grid.height; i++) { // row
+        for (let j = 0; j < grid.width; j++) { // col
+           grid.board[i][j].value = 0
+        }
+    }
+
+    // reset field background
+    Array.from(field).forEach(e => {
+        e.style.background = TRANSPARENT
+    })
+} 
+
+// create new Tetromino
+newTetromino = (blocks, colors, start_x, start_y) => {
+    let index = Math.floor(Math.random() * blocks.length)
+
+    return {
+        block: JSON.parse(JSON.stringify(blocks[index])),
+        color: colors[index],
+        x: start_x,
+        y: start_y
+    }
+}
+
+// draw tetromino on field
+drawTetromino = (tetromino, grid) => {
+    tetromino.block.forEach((row, i) => {
+        row.forEach((value, j) => {
+            let x = tetromino.x + i
+            let y = tetromino.y + j
+            if (value > 0) {
+                field[grid.board[x][y].index].style.background = tetromino.color
+            }
+        })
+    })
+}
+
+// clear tetromino
+clearTetromino = (tetromino, grid) => {
+    tetromino.block.forEach((row, i) => {
+        row.forEach((value, j) => {
+            let x = tetromino.x + i
+            let y = tetromino.y + j
+            if (value > 0) {
+                field[grid.board[x][y].index].style.background = TRANSPARENT
+            }
+        })
+    })
+}
+
+
+let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
+
+
+let tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
+
+drawTetromino(tetromino, grid)
+
+
+let btns = document.querySelectorAll('[id*="btn-"]')
 
 btns.forEach(e => {
     let btn_id = e.getAttribute('id')

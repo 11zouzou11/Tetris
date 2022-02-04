@@ -1,62 +1,3 @@
-let field = document.getElementsByClassName('block')
-
-// initializing new grid
-newGrid = (width, height) => {
-    let grid = new Array(height)
-    for (let i = 0; i < height; i++) {
-        grid[i] = new Array(width)
-    }
-
-    let index = 0
-    for (let i = 0; i < height; i++) {
-        for (let j = 0; j < width; j++) {
-            grid[i][j] = {
-                index: index++,
-                value: 0
-            }
-        }
-    }
-
-    return {
-        board: grid,
-        width: width,
-        height: height
-    }
-}
-
-
-// reset the grid
-
-resetGrid = (grid) => {
-    for (let i = 0; i < grid.height; i++) {
-        for (let j = 0; j < grid.width; j++) {
-            grid.board[i][j].value = 0
-        }
-    }
-
-    Array.form(field).forEach(e => {
-        e.style.background = TRANSPARENT
-    });
-}
-
-// new tetromino
-newTetromino = (blocks, colors, start_x, start_y) = > {
-    let index = Math.floor(Math.random() * blocks.length)
-
-    return {
-        block: JSON.parse(JSON.stringify(blocks[index])),
-        color: COLORS[index],
-        x: start_x,
-        y: start_y
-    }
-}
-
-
-let tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
-
-
-
-
 let board = document.querySelector('.board-section')
 
 for (let i = 0; i < 200; i++) {
@@ -100,7 +41,6 @@ falls = () => {
 }
 
 falls()
-
 
 let loading_square = document.querySelector('.square')
 
