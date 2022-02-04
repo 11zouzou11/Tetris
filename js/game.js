@@ -156,6 +156,13 @@ clearTetromino = (tetromino, grid) => {
         })
     })
 }
+// move tetromino down
+moveDown = (tetromino, grid) => {
+    if (!movable(tetromino, grid, DIRECTION.DOWN)) return
+    clearTetromino(tetromino, grid)
+    tetromino.x++
+    drawTetromino(tetromino, grid)
+}
 
 
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
