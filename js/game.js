@@ -263,6 +263,18 @@ hardDrop = (tetromino, grid) => {
     }
     drawTetromino(tetromino, grid)
 }
+// update grid when tetromino down
+updateGrid = (tetromino, grid) => {
+    tetromino.block.forEach((row, i) => {
+        row.forEach((value, j) => {
+            let x = tetromino.x + i
+            let y = tetromino.y + j
+            if (value > 0 && isInGrid(x, y, grid)) {
+                grid.board[x][y].value = value
+            }
+        })
+    })
+}
 
 
 let grid = newGrid(GRID_WIDTH, GRID_HEIGHT)
