@@ -39,6 +39,22 @@ resetGrid = (grid) => {
     });
 }
 
+// new tetromino
+newTetromino = (blocks, colors, start_x, start_y) = > {
+    let index = Math.floor(Math.random() * blocks.length)
+
+    return {
+        block: JSON.parse(JSON.stringify(blocks[index])),
+        color: COLORS[index],
+        x: start_x,
+        y: start_y
+    }
+}
+
+
+let tetromino = newTetromino(BLOCKS, COLORS, START_X, START_Y)
+
+
 
 
 let board = document.querySelector('.board-section')
